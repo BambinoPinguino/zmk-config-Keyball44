@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: keyball44}
 layers:
   colemak:
-  - {t: '$$mdi:keyboard-esc$$', s: '`'}
+  - $$mdi:keyboard-esc$$
   - Q
   - W
   - {t: F, h: FUNC}
@@ -23,7 +23,7 @@ layers:
   - {t: N, h: SYM/NAV}
   - {t: E, h: NUM/Media}
   - {t: I, h: KEYMOUSE}
-  - O
+  - {t: O, h: '$$mdi:apple-keyboard-shift$$'}
   - {t: '''', s: '"'}
   - $$mdi:apple-keyboard-shift$$
   - {t: Z, h: LEFT META}
@@ -102,8 +102,8 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
+  - '&soft_off'
+  - {t: '$$mdi:toggle-switch$$', h: '$$mdi:bluetooth$$', s: '$$mdi:usb$$'}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
@@ -271,13 +271,13 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   SYM/NAV:
-  - {t: '`', s: '~'}
+  - {t: Sft+`, s: Sft+~}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '=', s: +}
   - '{'
   - '}'
   - {t: '$$mdi:transfer$$', type: trans}
-  - $$mdi:pan-up$$
+  - PgUp
   - HOME
   - $$mdi:arrow-up-bold$$
   - END
@@ -289,7 +289,7 @@ layers:
   - (
   - {t: ), type: held}
   - {t: '$$mdi:transfer$$', type: trans}
-  - $$mdi:pan-down$$
+  - PgDn
   - {t: '$$mdi:arrow-left-bold$$', type: held alternate}
   - $$mdi:arrow-down-bold$$
   - $$mdi:arrow-right-bold$$
@@ -368,9 +368,9 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - $$mdi:pan-up$$
-  - '&mkp MB5'
-  - {t: '$$mdi:menu-up$$', s: '$$mdi:mouse$$'}
   - '&mkp MB4'
+  - {t: '$$mdi:menu-up$$', s: '$$mdi:mouse$$'}
+  - '&mkp MB5'
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
