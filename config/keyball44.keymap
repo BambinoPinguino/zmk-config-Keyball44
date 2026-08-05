@@ -11,6 +11,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
 &lt {
@@ -56,8 +57,8 @@
         colemak {
             label = "colemak";
             bindings = <
-&gresc          &kp Q             &kp W           &lt 3 F        &kp P      &kp B                 &kp J      &kp L    &kp U            &kp Y                 &kp SEMI              &kp BACKSLASH
-&kp TAB         &mt LEFT_SHIFT A  &lt 8 R         &lt 1 S        &lt 6 T    &kp G                 &kp M      &lt 6 N  &lt 1 E          &lt 8 I               &kp O                 &kp SQT
+&kp ESC         &kp Q             &kp W           &lt 3 F        &kp P      &kp B                 &kp J      &kp L    &kp U            &kp Y                 &kp SEMI              &kp BACKSLASH
+&kp TAB         &mt LEFT_SHIFT A  &lt 8 R         &lt 1 S        &lt 6 T    &kp G                 &kp M      &lt 6 N  &lt 1 E          &lt 8 I               &mt RIGHT_SHIFT O     &kp SQT
 &kp LEFT_SHIFT  &mt LEFT_META Z   &mt LEFT_ALT X  &mt LCTRL C    &kp D      &kp V                 &kp K      &kp H    &mt RCTRL COMMA  &mt RIGHT_ALT PERIOD  &mt RIGHT_META SLASH  &kp DEL
 &kp LCTRL       &kp LALT          &kp LEFT_WIN    &kp BACKSPACE  &lt 2 TAB             &kp SPACE  &kp ENTER                                                                        &mkp LCLK
             >;
@@ -76,10 +77,10 @@
         BT-KBLayout {
             label = "BT/KB";
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4              &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans        &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans        &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&to 0       &to 7         &trans        &trans        &trans                          &trans  &trans                                  &bootloader
+&bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4              &trans  &trans  &trans  &trans  &trans  &soft_off
+&out OUT_TOG  &trans        &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans        &trans        &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&to 0         &to 7         &trans        &trans        &trans                          &trans  &trans                                  &bootloader
             >;
         };
 
@@ -116,10 +117,10 @@
         SYMBOL-NAV {
             label = "SYM/NAV";
             bindings = <
-&kp GRAVE  &trans  &kp EQUAL  &kp LEFT_BRACE    &kp RIGHT_BRACE    &trans              &msc SCRL_UP    &kp HOME  &kp UP    &kp END    &trans  &trans
-&trans     &trans  &kp MINUS  &kp LPAR          &kp RPAR           &trans              &msc SCRL_DOWN  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans
-&trans     &trans  &trans     &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans              &trans          &trans    &trans    &trans     &trans  &kp PRINTSCREEN
-&trans     &trans  &trans     &trans            &trans                         &trans  &trans                                                 &trans
+&kp LS(GRAVE)  &trans  &kp EQUAL  &kp LEFT_BRACE    &kp RIGHT_BRACE    &trans              &kp PAGE_UP    &kp HOME  &kp UP    &kp END    &trans  &trans
+&trans         &trans  &kp MINUS  &kp LPAR          &kp RPAR           &trans              &kp PAGE_DOWN  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans
+&trans         &trans  &trans     &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans              &trans         &trans    &trans    &trans     &trans  &kp PRINTSCREEN
+&trans         &trans  &trans     &trans            &trans                         &trans  &trans                                                &trans
             >;
         };
 
@@ -136,7 +137,7 @@
 
         MOUSEKEYS {
             bindings = <
-&trans  &trans  &trans  &mkp MB3  &trans    &trans              &msc SCRL_UP    &mkp MB5        &mmv MOVE_UP    &mkp MB4         &trans  &trans
+&trans  &trans  &trans  &mkp MB3  &trans    &trans              &msc SCRL_UP    &mkp MB4        &mmv MOVE_UP    &mkp MB5         &trans  &trans
 &trans  &trans  &trans  &mkp MB2  &mkp MB1  &trans              &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
 &trans  &trans  &trans  &trans    &trans    &trans              &trans          &trans          &trans          &trans           &trans  &trans
 &trans  &trans  &trans  &trans    &trans                &trans  &trans                                                                   &trans
