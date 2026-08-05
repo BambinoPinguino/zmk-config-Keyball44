@@ -5,13 +5,13 @@ layers:
   - Q
   - W
   - F
-  - R
+  - P
   - B
   - J
   - L
   - U
   - Y
-  - P
+  - {t: ;, s: ':'}
   - {t: \, s: '|'}
   - $$mdi:keyboard-tab$$
   - A
