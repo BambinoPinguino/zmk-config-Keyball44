@@ -1,5 +1,6 @@
+zephyr_library()
+zephyr_library_sources(bongo_screen.c)
 if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND ((NOT CONFIG_ZMK_SPLIT) OR CONFIG_ZMK_SPLIT_ROLE_CENTRAL))
-    zephyr_library()
     zephyr_library_sources(${ZEPHYR_BASE}/misc/empty_file.c)
     zephyr_library_include_directories(${ZEPHYR_LVGL_MODULE_DIR})
     zephyr_library_include_directories(${ZEPHYR_BASE}/lib/gui/lvgl/)
@@ -8,6 +9,3 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND ((NOT CONF
     zephyr_library_sources(bongo_cat.c)
     zephyr_library_sources(bongo_cat_images.c)
 endif()
-
-zephyr_library()
-zephyr_library_sources(bongo_screen.c)
