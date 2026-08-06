@@ -132,8 +132,8 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {type: held}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
+  - '&bongo_screen 1'
+  - '&bongo_screen'
   - $$mdi:progress-download$$
   FUNC:
   - {t: '$$mdi:transfer$$', type: trans}
