@@ -136,7 +136,10 @@ struct bongo_cat_wpm_status_state bongo_cat_wpm_status_get_state(const zmk_event
 
 void bongo_cat_wpm_status_update_cb(struct bongo_cat_wpm_status_state state) {
     struct zmk_widget_bongo_cat *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_animation(widget->obj, state); }
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+        set_animation(widget->obj, state);
+        lv_label_set_text_fmt(widget->wpm_label, "WPM:%u", state.wpm);
+    }
 }
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_bongo_cat, struct bongo_cat_wpm_status_state,
@@ -147,6 +150,12 @@ ZMK_SUBSCRIPTION(widget_bongo_cat, zmk_wpm_state_changed);
 int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *parent) {
     widget->obj = lv_animimg_create(parent);
     lv_obj_center(widget->obj);
+
+    widget->wpm_label = lv_label_create(widget->obj);
+    lv_obj_set_style_text_font(widget->wpm_label, &lv_font_montserrat_8, LV_PART_MAIN);
+    lv_obj_set_style_text_color(widget->wpm_label, lv_color_black(), LV_PART_MAIN);
+    lv_obj_align(widget->wpm_label, LV_ALIGN_TOP_RIGHT, 0, 0);
+    lv_label_set_text(widget->wpm_label, "WPM:0");
 
     sys_slist_append(&widgets, &widget->node);
 

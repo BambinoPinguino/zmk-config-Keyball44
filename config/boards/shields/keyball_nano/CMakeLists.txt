@@ -8,3 +8,6 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND ((NOT CONF
     zephyr_library_sources(bongo_cat.c)
     zephyr_library_sources(bongo_cat_images.c)
 endif()
+
+zephyr_library()
+zephyr_library_sources(bongo_screen.c)
