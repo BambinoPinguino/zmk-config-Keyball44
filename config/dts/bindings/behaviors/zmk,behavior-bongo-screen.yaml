@@ -1,6 +1,10 @@
 # Copyright (c) 2026 The Bongocat ZMK Contributors
 # SPDX-License-Identifier: MIT
 
+description: Switch the display between bongo cat and the stock status screen
+
+compatible: "zmk,behavior-bongo-screen"
+
 include: behavior-metadata.yaml
 
 properties:
