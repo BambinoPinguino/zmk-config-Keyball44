@@ -54,6 +54,12 @@
             label = "BONGO_SCREEN";
             #binding-cells = <1>;
         };
+
+        battery_detail: battery_detail {
+            compatible = "zmk,behavior-battery-detail";
+            label = "BATTERY_DETAIL";
+            #binding-cells = <1>;
+        };
     };
 
     keymap {

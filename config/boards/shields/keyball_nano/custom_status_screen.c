@@ -8,6 +8,7 @@
  *   - `&bongo_screen 0`: stock ZMK status widgets (battery, output, layer, WPM)
  */
 
+#include "battery_label.h"
 #include "bongo_cat.h"
 #include "bongo_screen.h"
 
@@ -15,16 +16,13 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include <zmk/display.h>
-#include <zmk/display/widgets/battery_status.h>
 #include <zmk/display/widgets/layer_status.h>
 #include <zmk/display/widgets/output_status.h>
 #include <zmk/display/widgets/wpm_status.h>
 
 static struct zmk_widget_bongo_cat bongo_cat_widget;
+static struct battery_label_widget battery_label_widget;
 
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_BATTERY_STATUS)
-static struct zmk_widget_battery_status battery_status_widget;
-#endif
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_OUTPUT_STATUS)
 static struct zmk_widget_output_status output_status_widget;
 #endif
@@ -88,12 +86,11 @@ lv_obj_t *zmk_display_status_screen() {
 
     stock_container = make_container(screen);
     lv_obj_set_style_bg_color(stock_container, lv_color_white(), LV_PART_MAIN);
-#if IS_ENABLED(CONFIG_ZMK_WIDGET_BATTERY_STATUS)
-    zmk_widget_battery_status_init(&battery_status_widget, stock_container);
-    lv_obj_set_style_text_color(zmk_widget_battery_status_obj(&battery_status_widget),
-                                lv_color_black(), LV_PART_MAIN);
-    lv_obj_align(zmk_widget_battery_status_obj(&battery_status_widget), LV_ALIGN_TOP_RIGHT, 0, 0);
-#endif
+    battery_label_widget_init(&battery_label_widget, stock_container);
+    lv_obj_set_style_text_color(battery_label_widget_obj(&battery_label_widget), lv_color_black(),
+                                LV_PART_MAIN);
+    lv_obj_align(battery_label_widget_obj(&battery_label_widget), LV_ALIGN_TOP_RIGHT, 0, 0);
+    battery_label_widget_set_detail(&battery_label_widget, true);
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_OUTPUT_STATUS)
     zmk_widget_output_status_init(&output_status_widget, stock_container);
     lv_obj_set_style_text_color(zmk_widget_output_status_obj(&output_status_widget),
