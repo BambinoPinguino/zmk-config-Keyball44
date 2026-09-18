@@ -14,7 +14,7 @@ layers:
   - {t: ;, s: ':'}
   - {t: \, s: '|'}
   - $$mdi:keyboard-tab$$
-  - {t: A, h: '$$mdi:apple-keyboard-shift$$'}
+  - {t: A, h: lshift caps}
   - {t: R, h: KEYMOUSE}
   - {t: S, h: NUM/Media}
   - {t: T, h: SYM/NAV}
@@ -23,7 +23,7 @@ layers:
   - {t: N, h: SYM/NAV}
   - {t: E, h: NUM/Media}
   - {t: I, h: KEYMOUSE}
-  - {t: O, h: '$$mdi:apple-keyboard-shift$$'}
+  - {t: O, h: rshift caps}
   - {t: '''', s: '"'}
   - $$mdi:apple-keyboard-shift$$
   - {t: Z, h: LEFT META}
@@ -405,6 +405,3 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
-combos:
-- p: [13, 22]
-  k: $$mdi:alpha-w-box$$
