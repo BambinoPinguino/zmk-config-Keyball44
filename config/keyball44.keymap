@@ -68,7 +68,7 @@
         a_ht: a_shift_ht {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             tapping-term-ms = <180>;
             quick-tap-ms = <150>;
             bindings = <&lshift_caps>, <&kp>;
@@ -77,7 +77,7 @@
         o_ht: o_shift_ht {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             tapping-term-ms = <180>;
             quick-tap-ms = <150>;
             bindings = <&rshift_caps>, <&kp>;
