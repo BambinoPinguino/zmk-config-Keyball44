@@ -65,6 +65,24 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+        a_ht: a_shift_ht {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&lshift_caps>, <&kp>;
+        };
+
+        o_ht: o_shift_ht {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&rshift_caps>, <&kp>;
+        };
+
         bongo_screen: bongo_screen {
             compatible = "zmk,behavior-bongo-screen";
             label = "BONGO_SCREEN";
@@ -85,7 +103,7 @@
             label = "colemak";
             bindings = <
 &mt TILDE ESC   &kp Q             &kp W            &lt 3 F        &kp P      &kp B                 &kp J      &kp L    &kp U            &kp Y                 &kp SEMI              &kp BACKSLASH
-&kp TAB         &mt lshift_caps A &lt 8 R          &lt 1 S        &lt 6 T    &kp G                 &kp M      &lt 6 N  &lt 1 E          &lt 8 I               &mt rshift_caps O    &kp SQT
+&kp TAB         &a_ht 0 A         &lt 8 R          &lt 1 S        &lt 6 T    &kp G                 &kp M      &lt 6 N  &lt 1 E          &lt 8 I               &o_ht 0 O        &kp SQT
 &kp LEFT_SHIFT  &mt LEFT_META Z   &mt LEFT_ALT X   &mt LCTRL C    &kp D      &kp V                 &kp K      &kp H    &mt RCTRL COMMA  &mt RIGHT_ALT PERIOD  &mt RIGHT_META SLASH  &kp DEL
 &kp LCTRL       &kp LALT          &lt 5 LEFT_META  &kp BACKSPACE  &lt 2 TAB             &kp SPACE  &kp ENTER                                                                        &mkp LCLK
             >;
