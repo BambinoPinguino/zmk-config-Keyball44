@@ -69,7 +69,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             quick-tap-ms = <150>;
             bindings = <&lshift_caps>, <&kp>;
         };
@@ -78,7 +78,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             quick-tap-ms = <150>;
             bindings = <&rshift_caps>, <&kp>;
         };
@@ -91,7 +91,7 @@
 
         battery_detail: battery_detail {
             compatible = "zmk,behavior-battery-detail";
-            label = "BATTERY_DETAIL";
+            label = "BAT_DET";
             #binding-cells = <1>;
         };
     };

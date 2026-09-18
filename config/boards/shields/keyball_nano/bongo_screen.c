@@ -60,7 +60,7 @@ static int on_bongo_screen_binding_pressed(struct zmk_behavior_binding *binding,
     /* Mirror the view to the peripheral: while bongo is shown the left half
      * collapses to the bare battery icon; in status mode it shows icon + %. */
     struct zmk_behavior_binding detail_binding = {
-        .behavior_dev = "BATTERY_DETAIL",
+        .behavior_dev = "BAT_DET",
         .param1 = binding->param1 == 1 ? 0 : 1,
         .param2 = 0,
     };
