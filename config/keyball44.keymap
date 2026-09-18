@@ -49,6 +49,22 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+        lshift_caps: lshift_caps {
+            compatible = "zmk,behavior-mod-morph";
+            label = "LSHIFT_CAPS";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT>, <&caps_word>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        rshift_caps: rshift_caps {
+            compatible = "zmk,behavior-mod-morph";
+            label = "RSHIFT_CAPS";
+            #binding-cells = <0>;
+            bindings = <&kp RIGHT_SHIFT>, <&caps_word>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
         bongo_screen: bongo_screen {
             compatible = "zmk,behavior-bongo-screen";
             label = "BONGO_SCREEN";
@@ -69,7 +85,7 @@
             label = "colemak";
             bindings = <
 &mt TILDE ESC   &kp Q             &kp W            &lt 3 F        &kp P      &kp B                 &kp J      &kp L    &kp U            &kp Y                 &kp SEMI              &kp BACKSLASH
-&kp TAB         &mt LEFT_SHIFT A  &lt 8 R          &lt 1 S        &lt 6 T    &kp G                 &kp M      &lt 6 N  &lt 1 E          &lt 8 I               &mt RIGHT_SHIFT O     &kp SQT
+&kp TAB         &mt lshift_caps A &lt 8 R          &lt 1 S        &lt 6 T    &kp G                 &kp M      &lt 6 N  &lt 1 E          &lt 8 I               &mt rshift_caps O    &kp SQT
 &kp LEFT_SHIFT  &mt LEFT_META Z   &mt LEFT_ALT X   &mt LCTRL C    &kp D      &kp V                 &kp K      &kp H    &mt RCTRL COMMA  &mt RIGHT_ALT PERIOD  &mt RIGHT_META SLASH  &kp DEL
 &kp LCTRL       &kp LALT          &lt 5 LEFT_META  &kp BACKSPACE  &lt 2 TAB             &kp SPACE  &kp ENTER                                                                        &mkp LCLK
             >;
@@ -155,16 +171,6 @@
             >;
 
             label = "KEYMOUSE";
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-        combo_caps_word {
-            timeout-ms = <200>;
-            key-positions = <13 22>;
-            require-prior-idle-ms = <200>;
-            bindings = <&caps_word>;
         };
     };
 };
