@@ -83,7 +83,7 @@
             label = "BT/KB";
             bindings = <
 &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4              &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans        &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans      &caps_word     &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &caps_word  &trans
 &trans      &trans        &trans        &trans        &trans        &trans                    &trans  &trans  &trans  &trans  &trans  &trans
 &to 0       &to 7         &trans        &trans        &trans                          &bongo_screen 1  &bongo_screen 0                                  &bootloader
             >;
@@ -122,7 +122,7 @@
         SYMBOL-NAV {
             label = "SYM/NAV";
             bindings = <
-&kp LS(GRAVE)  &trans  &kp EQUAL  &kp LEFT_BRACE    &kp RIGHT_BRACE    &trans              &kp PAGE_UP    &kp HOME  &kp UP    &kp END    &trans  &trans
+&kp LS(GRAVE)  &trans  &kp EQUAL  &kp LEFT_BRACE    &kp RIGHT_BRACE    &trans              &kp PAGE_UP    &kp HOME  &kp UP    &kp END    &trans  &kp INSERT
 &trans         &trans  &kp MINUS  &kp LPAR          &kp RPAR           &trans              &kp PAGE_DOWN  &kp LEFT  &kp DOWN  &kp RIGHT  &trans  &trans
 &trans         &trans  &trans     &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans              &trans         &trans    &trans    &trans     &trans  &kp PRINTSCREEN
 &trans         &trans  &trans     &trans            &trans                         &trans  &trans                                                &trans
@@ -149,6 +149,15 @@
             >;
 
             label = "KEYMOUSE";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        combo_caps_word {
+            timeout-ms = <50>;
+            key-positions = <22 24>;
+            bindings = <&caps_word>;
         };
     };
 };

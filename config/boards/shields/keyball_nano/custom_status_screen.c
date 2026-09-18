@@ -46,6 +46,9 @@ static void set_screen_mode(struct bongo_screen_mode mode) {
         lv_obj_add_flag(bongo_container, LV_OBJ_FLAG_HIDDEN);
         lv_obj_clear_flag(stock_container, LV_OBJ_FLAG_HIDDEN);
     }
+
+    lv_obj_invalidate(bongo_container);
+    lv_obj_invalidate(stock_container);
 }
 
 static struct bongo_screen_mode bongo_screen_mode_get_state(const zmk_event_t *eh) {
@@ -86,20 +89,28 @@ lv_obj_t *zmk_display_status_screen() {
     stock_container = make_container(screen);
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_BATTERY_STATUS)
     zmk_widget_battery_status_init(&battery_status_widget, stock_container);
+    lv_obj_set_style_text_color(zmk_widget_battery_status_obj(&battery_status_widget),
+                                lv_color_white(), LV_PART_MAIN);
     lv_obj_align(zmk_widget_battery_status_obj(&battery_status_widget), LV_ALIGN_TOP_RIGHT, 0, 0);
 #endif
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_OUTPUT_STATUS)
     zmk_widget_output_status_init(&output_status_widget, stock_container);
+    lv_obj_set_style_text_color(zmk_widget_output_status_obj(&output_status_widget),
+                                lv_color_white(), LV_PART_MAIN);
     lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_TOP_LEFT, 0, 0);
 #endif
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_LAYER_STATUS)
     zmk_widget_layer_status_init(&layer_status_widget, stock_container);
     lv_obj_set_style_text_font(zmk_widget_layer_status_obj(&layer_status_widget),
                                lv_theme_get_font_small(screen), LV_PART_MAIN);
+    lv_obj_set_style_text_color(zmk_widget_layer_status_obj(&layer_status_widget),
+                                lv_color_white(), LV_PART_MAIN);
     lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_BOTTOM_LEFT, 0, 0);
 #endif
 #if IS_ENABLED(CONFIG_ZMK_WIDGET_WPM_STATUS)
     zmk_widget_wpm_status_init(&wpm_status_widget, stock_container);
+    lv_obj_set_style_text_color(zmk_widget_wpm_status_obj(&wpm_status_widget), lv_color_white(),
+                                LV_PART_MAIN);
     lv_obj_align(zmk_widget_wpm_status_obj(&wpm_status_widget), LV_ALIGN_BOTTOM_RIGHT, 0, 0);
 #endif
 
