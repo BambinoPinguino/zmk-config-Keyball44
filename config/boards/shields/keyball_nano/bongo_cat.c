@@ -10,10 +10,8 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#include <zmk/display.h>
 #include <zmk/event_manager.h>
-#include <zmk/events/wpm_state_changed.h>
-#include <zmk/wpm.h>
+#include <zmk/events/keycode_state_changed.h>
 
 #include "bongo_cat.h"
 
@@ -129,23 +127,68 @@ static void set_animation(lv_obj_t *animing, struct bongo_cat_wpm_status_state s
     }
 }
 
-struct bongo_cat_wpm_status_state bongo_cat_wpm_status_get_state(const zmk_event_t *eh) {
-    struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
-    return (struct bongo_cat_wpm_status_state){.wpm = ev->state};
-};
+#define WPM_WINDOW_SECONDS 30
+#define WPM_BUCKETS WPM_WINDOW_SECONDS
+#define CHARS_PER_WORD 5.0
 
-void bongo_cat_wpm_status_update_cb(struct bongo_cat_wpm_status_state state) {
-    struct zmk_widget_bongo_cat *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-        set_animation(widget->obj, state);
-        lv_label_set_text_fmt(widget->wpm_label, "WPM:%03u", state.wpm);
+/* Sliding 30 s WPM window, refreshed once per second. One bucket holds the
+ * number of key releases folded in each elapsed second; buckets rotate over
+ * WPM_BUCKETS slots, so summing the array yields a rolling 30 s count. */
+static uint16_t wpm_release_buckets[WPM_BUCKETS];
+static uint64_t wpm_folded_seconds;
+static uint16_t wpm_current_releases;
+static lv_timer_t *wpm_refresh_timer;
+
+static void wpm_fold_seconds(uint64_t up_to) {
+    if (wpm_folded_seconds == 0) {
+        wpm_folded_seconds = up_to;
+        return;
+    }
+
+    while (wpm_folded_seconds < up_to) {
+        wpm_release_buckets[wpm_folded_seconds % WPM_BUCKETS] = wpm_current_releases;
+        wpm_current_releases = 0;
+        wpm_folded_seconds++;
     }
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_bongo_cat, struct bongo_cat_wpm_status_state,
-                            bongo_cat_wpm_status_update_cb, bongo_cat_wpm_status_get_state)
+static uint32_t wpm_window_sum(void) {
+    uint32_t sum = 0;
+    for (size_t i = 0; i < WPM_BUCKETS; i++) {
+        sum += wpm_release_buckets[i];
+    }
+    return sum;
+}
 
-ZMK_SUBSCRIPTION(widget_bongo_cat, zmk_wpm_state_changed);
+static void bongo_cat_wpm_update(uint8_t wpm) {
+    struct bongo_cat_wpm_status_state state = {.wpm = wpm};
+    struct zmk_widget_bongo_cat *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+        set_animation(widget->obj, state);
+        lv_label_set_text_fmt(widget->wpm_label, "WPM:%03u", wpm);
+    }
+}
+
+static void bongo_cat_wpm_refresh(lv_timer_t *timer) {
+    (void)timer;
+    wpm_fold_seconds(k_uptime_get() / 1000);
+    uint32_t wpm = (uint32_t)((wpm_window_sum() / CHARS_PER_WORD) / (WPM_WINDOW_SECONDS / 60.0));
+    if (wpm > 255) {
+        wpm = 255;
+    }
+    bongo_cat_wpm_update((uint8_t)wpm);
+}
+
+static int bongo_cat_wpm_keycode_listener(const zmk_event_t *eh) {
+    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    if (ev && !ev->state) {
+        wpm_current_releases++;
+    }
+    return ZMK_EV_EVENT_BUBBLE;
+}
+
+ZMK_LISTENER(bongo_cat_wpm, bongo_cat_wpm_keycode_listener);
+ZMK_SUBSCRIPTION(bongo_cat_wpm, zmk_keycode_state_changed);
 
 int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *parent) {
     widget->obj = lv_animimg_create(parent);
@@ -159,7 +202,10 @@ int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *par
 
     sys_slist_append(&widgets, &widget->node);
 
-    widget_bongo_cat_init();
+    if (wpm_refresh_timer == NULL) {
+        wpm_refresh_timer = lv_timer_create(bongo_cat_wpm_refresh, 1000, NULL);
+        bongo_cat_wpm_refresh(wpm_refresh_timer);
+    }
 
     return 0;
 }

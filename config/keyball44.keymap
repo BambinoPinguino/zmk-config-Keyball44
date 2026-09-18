@@ -155,8 +155,9 @@
     combos {
         compatible = "zmk,combos";
         combo_caps_word {
-            timeout-ms = <150>;
-            key-positions = <22 24>;
+            timeout-ms = <200>;
+            key-positions = <13 22>;
+            require-prior-idle-ms = <200>;
             bindings = <&caps_word>;
         };
     };
