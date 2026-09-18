@@ -152,7 +152,7 @@ int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *par
     lv_obj_center(widget->obj);
 
     widget->wpm_label = lv_label_create(widget->obj);
-    lv_obj_set_style_text_font(widget->wpm_label, &lv_font_unscrii_8, LV_PART_MAIN);
+    lv_obj_set_style_text_font(widget->wpm_label, &lv_font_unscii_8, LV_PART_MAIN);
     lv_obj_set_style_text_color(widget->wpm_label, lv_color_black(), LV_PART_MAIN);
     lv_obj_align(widget->wpm_label, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_label_set_text(widget->wpm_label, "WPM:000");
