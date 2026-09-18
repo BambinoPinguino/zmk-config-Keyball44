@@ -1,11 +1,6 @@
 name: Draw ZMK keymaps
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/keymap_draser.yml"
-      - "keymap_drawer.config.yaml"
-      - "config/**"
 
 jobs:
   draw:
