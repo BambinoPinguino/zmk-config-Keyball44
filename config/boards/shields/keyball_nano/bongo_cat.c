@@ -127,13 +127,13 @@ static void set_animation(lv_obj_t *animing, struct bongo_cat_wpm_status_state s
     }
 }
 
-#define WPM_WINDOW_SECONDS 30
+#define WPM_WINDOW_SECONDS 15
 #define WPM_BUCKETS WPM_WINDOW_SECONDS
 #define CHARS_PER_WORD 5.0
 
-/* Sliding 30 s WPM window, refreshed once per second. One bucket holds the
+/* Sliding 15 s WPM window, refreshed once per second. One bucket holds the
  * number of key releases folded in each elapsed second; buckets rotate over
- * WPM_BUCKETS slots, so summing the array yields a rolling 30 s count. */
+ * WPM_BUCKETS slots, so summing the array yields a rolling 15 s count. */
 static uint16_t wpm_release_buckets[WPM_BUCKETS];
 static uint64_t wpm_folded_seconds;
 static uint16_t wpm_current_releases;
