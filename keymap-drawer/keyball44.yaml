@@ -406,5 +406,5 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
 combos:
-- p: [22, 24]
+- p: [13, 22]
   k: $$mdi:alpha-w-box$$
